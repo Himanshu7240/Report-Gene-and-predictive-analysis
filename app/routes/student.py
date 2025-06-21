@@ -1,21 +1,31 @@
-# app/routes/student.py
-
 from fastapi import APIRouter
-from app.ml.model import train_student_performance_model
 import pandas as pd
 
 router = APIRouter()
 
-# Sample student data (You can replace this with actual DB or CSV data)
-student_data = pd.read_csv("data/students.csv")
-
 @router.get("/students/performance")
 async def get_student_performance():
     """
-    Retrieve student performance including score, attendance, and behavior data.
+    Retrieve student performance including score, attendance, behavior, and remarks.
+    Remarks are derived based on the score.
     """
-    # In a real scenario, you might query the database here.
-    # For simplicity, we're using static data.
+    # Load student data
+    student_data = pd.read_csv("data/students.csv")
 
-    # For this POC, returning first 5 rows of student data
-    return student_data[['name', 'score', 'attendance', 'behavior']].head(5)
+    # Define a function to assign remarks based on score
+    def get_remarks(score):
+        if score >= 90:
+            return "Excellent"
+        elif score >= 80:
+            return "Good"
+        elif score >= 70:
+            return "Fair"
+        else:
+            return "Needs Improvement"
+
+    # Apply remarks
+    student_data["remarks"] = student_data["score"].apply(get_remarks)
+
+    # Return selected fields including calculated remarks
+    result = student_data[['name', 'score', 'attendance', 'behavior', 'remarks']].head(5)
+    return result.to_dict(orient="records")
