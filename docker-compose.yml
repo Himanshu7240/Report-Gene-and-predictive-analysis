@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # FastAPI service
+  app:
+    build: .
+    container_name: report-app
+    ports:
+      - "8000:8000"  # Expose FastAPI app on port 8000
+    volumes:
+      - .:/app  # Mount the app directory to the container
+    environment:
+      - ENV=development
+    depends_on:
+      - db  # Wait for PostgreSQL to start
+
+  # PostgreSQL service
+  db:
+    image: postgres:13
+    container_name: report-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: reports_db
+    volumes:
+      - ./data/db:/var/lib/postgresql/data  # Persist data to the host
+    ports:
+      - "5432:5432"  # Expose PostgreSQL on port 5432
+
+  # Optionally, add a pgAdmin service (if needed for PostgreSQL management)
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db

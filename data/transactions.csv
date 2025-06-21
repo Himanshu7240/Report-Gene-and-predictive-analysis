@@ -1,0 +1,11 @@
+transaction_id,student_id,payment_date,payment_type,amount
+1,1,2023-01-15,Tuition,500
+2,2,2023-02-20,Tuition,450
+3,3,2023-03-05,Library Fee,50
+4,4,2023-04-12,Tuition,500
+5,5,2023-05-08,Tuition,450
+6,6,2023-06-18,Library Fee,50
+7,7,2023-07-22,Tuition,500
+8,8,2023-08-30,Library Fee,50
+9,9,2023-09-10,Tuition,450
+10,10,2023-10-02,Tuition,500
