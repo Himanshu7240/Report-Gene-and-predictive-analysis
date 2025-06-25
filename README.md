@@ -36,7 +36,7 @@ Frontend ──► FastAPI Backend ──► PostgreSQL Database
 
 ### Using Docker (Recommended)
 ```bash
-git clone <repository-url>
+git clone https://github.com/KarTik-1-SinGH/Report-gene-and-predictive-analysis.git
 cd Report-gene-and-predictive-analysis
 docker-compose up --build
 ```
