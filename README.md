@@ -16,7 +16,7 @@ Frontend ──► FastAPI Backend ──► PostgreSQL Database
 
 ## 📁 Project Structure
 ```
-/learning-management-backend
+/Report-gene-and-predictive-analysis
 ├── app/
 │   ├── main.py              # FastAPI entry point
 │   ├── models.py            # Database models
